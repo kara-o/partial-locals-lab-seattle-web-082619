@@ -15,7 +15,12 @@ class Student < ActiveRecord::Base
   has_many :classrooms, through: :classroom_students
 
   def self.search(string)
-    Student.where("name like ?", "%#{string}%")
+    collection = Student.where("name like ?", "%#{string}%")
+    if collection.count == 0
+      Student.all
+    else
+      collection
+    end 
   end
 
 end
