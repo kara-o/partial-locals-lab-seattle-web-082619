@@ -1,0 +1,13 @@
+<h1>Student Index</h1>
+
+<%= form_tag(students_path, method: :get) do %>
+  <%= text_field_tag(:query, params[:query]) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<%@searched_students = Student.search(params[:query])%>
+
+<% @searched_students.each do |s| %>
+
+ <%= render partial: 'student', locals: {student: s} %>
+ <% end %>
